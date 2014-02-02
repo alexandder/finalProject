@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:rich="http://richfaces.org/rich"
+                xmlns:a4j="http://richfaces.org/a4j">
+    <h:outputStylesheet library="css" name="heading.css" />
+    <div class="heading">
+        <rich:panel>
+            <f:facet name="header">
+                #{msgs.title}
+            </f:facet>
+
+            <h:form>
+                <rich:tabPanel switchType="ajax" activeItem="#{displayTab.displayTab}" id="menuPanel" itemChangeListener="#{displayTab.changeTab}">
+
+                    <rich:tab header="#{msgs.footballer}" name="footballerTab" >
+
+                        <h:commandButton action="showFootballers?faces-redirect=true" value="#{msgs.showFootballers}" styleClass="button" />
+                        <h:commandButton action="addFootballer?faces-redirect=true" value="#{msgs.addFootballer}" styleClass="button" />
+
+                    </rich:tab>
+
+
+                    <rich:tab header="#{msgs.coach}" name="coachTab">
+
+                        <h:commandButton action="showCoaches?faces-redirect=true" value="#{msgs.showCoaches}" styleClass="button"/>
+                        <h:commandButton action="addCoach?faces-redirect=true" value="#{msgs.addCoach}" styleClass="button"/>
+
+                    </rich:tab>
+
+
+                    <rich:tab header="#{msgs.team}" name="teamTab">
+
+                        <h:commandButton action="showTeams?faces-redirect=true" value="#{msgs.showTeams}" styleClass="button" />
+                        <h:commandButton action="addTeam?faces-redirect=true" value="#{msgs.addTeam}" styleClass="button" />
+
+                    </rich:tab>
+
+
+                    <rich:tab header="#{msgs.competition}" name="competitionTab">
+
+                        <h:commandButton action="showCompetitions?faces-redirect=true" value="#{msgs.showCompetitions}" styleClass="button"/>
+                        <h:commandButton action="addCompetition?faces-redirect=true" value="#{msgs.addCompetition}" styleClass="button"/>
+
+                    </rich:tab>
+
+                </rich:tabPanel>
+            </h:form>
+
+        </rich:panel>
+    </div>
+
+</ui:composition>

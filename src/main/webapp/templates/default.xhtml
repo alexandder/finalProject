@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>
+            <ui:insert name="windowTitle">#{msgs.title}</ui:insert>
+        </title> 
+    </h:head>
+
+    <h:body>
+        <h:outputStylesheet library="css" name="default.css" />
+        <h:outputStylesheet library="css" name="heading.css" />
+        <h:panelGrid columns="2" cellpadding="3" columnClasses="mainPanel">
+            <h:panelGroup>
+                <ui:insert name="heading">
+                    <ui:include src="/views/user/heading.xhtml" />
+                </ui:insert>
+            </h:panelGroup>
+            <h:panelGroup>
+                <ui:insert name="logout">
+                    <ui:include src="/views/user/logout.xhtml" />
+                </ui:insert>
+            </h:panelGroup>
+            <h:panelGroup>
+                <div class="content">
+                    <ui:insert name="content" >
+
+                    </ui:insert>
+                </div>
+            </h:panelGroup>
+            <h:panelGroup>
+                <div class="skin">
+                    <ui:insert name="skin">
+                        <ui:include src="/views/user/skin.xhtml" />
+                    </ui:insert>
+                </div>
+            </h:panelGroup>
+        </h:panelGrid>
+    </h:body>
+</html>

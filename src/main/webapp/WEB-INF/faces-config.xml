@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<faces-config version="2.2"
+              xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
+
+    
+    <application>
+        <resource-bundle>
+            <base-name>com.example.messages</base-name>
+            <var>msgs</var>
+        </resource-bundle>
+        
+        <locale-config>
+            <default-locale>pl</default-locale>
+            <supported-locale>pl</supported-locale>
+            <supported-locale>en</supported-locale>
+        </locale-config>
+    </application>
+    
+    <managed-bean>
+        <managed-bean-name>skin</managed-bean-name>
+        <managed-bean-class>com.example.domain.Skin</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+        <managed-property>
+            <property-name>skin</property-name>
+            <value>emeraldTown</value>                
+        </managed-property>
+        <managed-property>
+            <property-name>skins</property-name>
+            <list-entries>
+                <value>emeraldTown</value>
+                <value>blueSky</value>
+                <value>wine</value>
+                <value>japanCherry</value>
+                <value>ruby</value>
+                <value>classic</value>
+                <value>deepMarine</value>
+            </list-entries>
+        </managed-property>
+    </managed-bean>
+</faces-config>

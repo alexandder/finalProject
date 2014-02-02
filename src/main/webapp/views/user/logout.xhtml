@@ -1,0 +1,19 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:rich="http://richfaces.org/rich">
+    <h:outputStylesheet library="css" name="heading.css" />
+    <div name="logoutForm">            
+        <rich:panel>
+            <f:facet name="header">
+                <h:outputText value="#{msgs.logout}"></h:outputText>
+            </f:facet>
+            <h:form>
+                <h:commandButton class="button" value="#{msgs.logout}" action="#{myUserBean.logout()}"/>
+            </h:form>
+        </rich:panel>
+
+    </div>
+
+</ui:composition>
