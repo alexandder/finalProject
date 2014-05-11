@@ -14,6 +14,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.NamedNativeQueries;
+import javax.persistence.NamedNativeQuery;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
@@ -26,7 +28,10 @@ import javax.persistence.OneToOne;
 @NamedQueries ({
     @NamedQuery(name="team.all" ,query = "Select t from Team t"),
     @NamedQuery(name="team.footballer" ,query = "Select f from Footballer f WHERE f.team.id=:idteam"),
-    @NamedQuery(name="team.available", query = "Select t from Team t JOIN t.competitions c WHERE c.id<>:compId")
+    @NamedQuery(name="team.available", query = "Select t from Team t JOIN t.competitions c WHERE c.id<>:compID")
+})
+@NamedNativeQueries({
+    @NamedNativeQuery(name = "teams.notComp", query = "SELECT * FROM TEAM t WHERE t.ID NOT IN (SELECT TEAM_ID FROM COMP_TEAM WHERE COMP_ID=:compId)", resultClass = Team.class)
 })
 public class Team implements Serializable {
     

@@ -27,7 +27,7 @@ import javax.validation.Payload;
 @Target({METHOD, FIELD, PARAMETER, TYPE})
 public @interface Pesel {
 
-    String message() default "com.example.Pesel.message";
+    String message() default "Invalid pesel";
     
     Class<?>[] groups() default {};
     

@@ -28,7 +28,10 @@ and open the template in the editor.
                     <h:message id="nameError" for="name" style="color: red" />           
 
                     <h:outputText value="#{msgs.lastName}"></h:outputText>
-                    <h:inputText id="lastName" value="#{footballerFormBean.footballer.lastName}" />
+                    <h:inputText id="lastName" value="#{footballerFormBean.footballer.lastName}">
+                        <f:validateLength minimum="2" />
+                        <f:ajax event="keyup" execute="@this" render="nameError" />
+                    </h:inputText>
                     <h:message id="lastNameError" for="lastName" style="color: red" />
 
                     <h:outputText value="#{msgs.numberOfGoals}"></h:outputText>

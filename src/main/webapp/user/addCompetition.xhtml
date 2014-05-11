@@ -26,7 +26,6 @@ and open the template in the editor.
                     <h:outputText value="#{msgs.teams}" />
                     <h:selectManyMenu value="#{competitionFormBean.teamsId}">
                         <f:selectItems value="#{teamFormBean.allTeams}" var="team" itemValue="#{team.id}" itemLabel="#{team.name}" />
-                        <f:selectItem itemLabel="---" noSelectionOption="true" />
                     </h:selectManyMenu>
                     <h:commandButton value="#{msgs.addCompetition}" action="#{competitionFormBean.addCompetition()}" />
                 </h:panelGrid>

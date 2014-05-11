@@ -10,6 +10,8 @@ import com.example.domain.Team;
 import com.example.service.CompetitionManager;
 import com.example.service.TeamManager;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.model.ListDataModel;
 import javax.inject.Inject;
@@ -29,7 +31,10 @@ public class CompetitionFormBean implements Serializable {
     private Long[] teamsId;
     private long teamId;
     private Team team;
-
+    private List<Team> teamsToAdd;
+    private List<Team> teamsC;
+    
+    
     @Inject
     private CompetitionManager competitionManager;
 
@@ -47,9 +52,9 @@ public class CompetitionFormBean implements Serializable {
         return null;
     }
 
-    public String addTeamsToCompetition() {
-
-        return null;
+    public String addTeamToCompetition() {
+        competitionManager.addTeamToCompetition(competition, teamId);
+        return "showCompetition";
     }
 
     public Competition getCompetition() {
@@ -68,17 +73,12 @@ public class CompetitionFormBean implements Serializable {
     public String removeFromLeague(Long id) {
         competitionManager.removeTeamFromCompetition(competition, id);
         competition = competitionManager.refreshCompetition(competition.getId());
-        return "showCompetition";
-    }
-
-    public String updateCompetition() {
-        competitionManager.updateCompetition(competition, teamsId);
-        return "showCompetitions";
+        return "showCompetition?faces-redirect=true";
     }
 
     public String selectCompetition() {
         competition = competitions.getRowData();
-        return "showCompetition";
+        return "showCompetition?faces-redirect=true";
     }
 
     public String selectCompetitionForUpdate() {
@@ -131,12 +131,59 @@ public class CompetitionFormBean implements Serializable {
     }
 
     public ListDataModel<Team> getTeams() {
-        availableTeams.setWrappedData(teamManager.getAvailableTeams(competition));
+        List<Team> teams = teamManager.getAllTeams();
+        List<Team> teamsIn = competitionManager.getTeamsByCompetition(competition.getId());
+        List<Team> teamsFree = new ArrayList<>();
+        boolean check;
+        for(Team t: teams) {
+            check = true;
+            for(Team tIn: teamsIn){
+                if (t.getName().equals(tIn.getName())) {
+                    check = false;
+                    break;
+                }
+            }
+            if (check == true) {
+                teamsFree.add(t);
+            }
+        }
+        if (!teamsFree.isEmpty())
+            availableTeams.setWrappedData(teamsFree);
+
         return availableTeams;
     }
 
     public void setTeams(ListDataModel<Team> teams) {
-        this.availableTeams = teams;
+        this.setAvailableTeams(teams);
+    }
+
+    public List<Team> getTeamsToAdd() {
+        teamsToAdd = teamManager.getAllTeams();
+        teamsToAdd.removeAll(competition.getTeams());
+        return teamsToAdd;
+    }
+
+    public void setTeamsToAdd(List<Team> teamsToAdd) {
+        this.teamsToAdd = teamsToAdd;
+    }
+
+    public ListDataModel<Team> getAvailableTeams() {
+        List<Team> teams = teamManager.getAvailableTeams(competition.getId());
+        availableTeams.setWrappedData(teams);
+        return availableTeams;
+    }
+
+    public void setAvailableTeams(ListDataModel<Team> availableTeams) {
+        this.availableTeams = availableTeams;
+    }
+
+    public List<Team> getTeamsC() {
+        teamsC = competition.getTeams();
+        return teamsC;
+    }
+
+    public void setTeamsC(List<Team> teamsC) {
+        this.teamsC = teamsC;
     }
 
 }

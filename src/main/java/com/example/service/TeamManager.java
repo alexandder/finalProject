@@ -64,9 +64,10 @@ public class TeamManager {
     }
 
     @SuppressWarnings("unchecked")
-    public List<Team> getAvailableTeams(Competition competition) {
+    public List<Team> getAvailableTeams(Long id) {
+        
         try {
-            return entityManager.createNamedQuery("team.available", Team.class).setParameter("compID", competition.getId()).getResultList();
+            return entityManager.createNamedQuery("team.available", Team.class).setParameter("compID", id).getResultList();
         } catch (NoResultException e) {
             return null;
         }

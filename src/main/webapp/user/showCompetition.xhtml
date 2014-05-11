@@ -12,7 +12,7 @@
 
         <rich:panel>
             <h:form>
-                <rich:extendedDataTable value="#{competitionFormBean.competition.teams}" var="item">
+                <rich:extendedDataTable value="#{competitionFormBean.teamsC}" var="item">
                     <f:facet name="header">
                         #{msgs.competition}
                     </f:facet>
@@ -42,11 +42,10 @@
                 <rich:panel>
                     <h:form>
                         <h:panelGrid>
-                            <h:selectManyMenu value="#{competitionFormBean.teamsId}">
-                                <f:selectItems value="#{teamFormBean.allTeams}" var="team" itemValue="#{team.id}" itemLabel="#{team.name}" />
-
-                            </h:selectManyMenu>
-                            <h:commandButton value="#{msgs.addTeam}" action="#{competitionFormBean.addTeamsToCompetition()}" />
+                            <h:selectOneListbox value="#{competitionFormBean.teamId}">
+                                <f:selectItems value="#{competitionFormBean.teams}" var="team" itemValue="#{team.id}" itemLabel="#{team.name}" />
+                            </h:selectOneListbox>
+                            <h:commandButton value="#{msgs.addTeam}" action="#{competitionFormBean.addTeamToCompetition()}" />
                         </h:panelGrid>
                     </h:form>
                 </rich:panel>
